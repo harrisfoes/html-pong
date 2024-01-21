@@ -10,16 +10,16 @@ let downPressed = false;
 const player = {
   x: 10,
   y: 20,
-  width: 20,
-  height: 100,
+  width: 15,
+  height: 75,
   score: 0,
 };
 
 const opponent = {
   x: canvas.width - 30,
   y: 20,
-  width: 20,
-  height: 100,
+  width: 15,
+  height: 75,
   speed: 2,
   score: 0,
 };
@@ -27,9 +27,16 @@ const opponent = {
 const ball = {
   x: canvas.width / 2,
   y: canvas.height / 2,
-  radius: 10,
+  radius: 6,
   dx: 1,
   dy: 1,
+};
+
+const net = {
+  x: canvas.width / 2 - 1,
+  y: 5,
+  width: 2,
+  height: 6,
 };
 
 function keyDownHandler(event) {
@@ -117,6 +124,11 @@ function draw() {
   ctx.fillStyle = "orange";
   ctx.font = "22px Orbitron";
   ctx.fillText("This is pong", 50, 50);
+
+  for (let i = net.y; i < canvas.height; i = i + net.height + 10) {
+    ctx.rect(net.x, i, net.width, net.height);
+  }
+
   ctx.rect(player.x, player.y, player.width, player.height);
   ctx.rect(opponent.x, opponent.y, opponent.width, opponent.height);
   ctx.arc(ball.x, ball.y, ball.radius, 0, 2 * Math.PI, false);
