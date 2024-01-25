@@ -68,8 +68,13 @@ function gameLoop() {
   ball.y -= ball.dy * ball_speed;
 
   //bounds
-  if (ball.x + ball.radius >= canvas.width || ball.x - ball.radius <= 0) {
+  if (ball.x + ball.radius >= canvas.width) {
+    player.score++;
+    resetBall();
+  }
+  if (ball.x - ball.radius <= 0) {
     //ball.dx *= -1;
+    opponent.score++;
     resetBall();
   }
 
@@ -123,7 +128,9 @@ function draw() {
   ctx.beginPath();
   ctx.fillStyle = "orange";
   ctx.font = "22px Orbitron";
-  ctx.fillText("This is pong", 50, 50);
+  ctx.fillText("Pong", 50, 50);
+  ctx.fillText(player.score, canvas.width / 4, canvas.height / 2);
+  ctx.fillText(opponent.score, (canvas.width / 4) * 3, canvas.height / 2);
 
   for (let i = net.y; i < canvas.height; i = i + net.height + 10) {
     ctx.rect(net.x, i, net.width, net.height);
